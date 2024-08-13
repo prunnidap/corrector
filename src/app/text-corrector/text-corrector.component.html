@@ -1,0 +1,29 @@
+<div class="container">
+    <mat-card>
+        <mat-card-title>Correcteur d'orthographe</mat-card-title>
+        <mat-card-content>
+            <form (ngSubmit)="onSubmit()">
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Entrez votre texte</mat-label>
+                    <textarea matInput [(ngModel)]="longText" name="longText" rows="40"></textarea>
+                </mat-form-field>
+                <button mat-raised-button color="primary" type="submit">Soumettre</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card *ngIf="corrections.length > 0" class="corrections">
+        <mat-card-title>Corrections :</mat-card-title>
+        <mat-card-content>
+            <mat-list>
+                <mat-list-item *ngFor="let correction of corrections">
+                    <span matLine><strong>{{ correction.error }}</strong>: {{ correction.suggestion }}</span>
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+
+    <div *ngIf="loading" class="loading-spinner">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
+</div>
